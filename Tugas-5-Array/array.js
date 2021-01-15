@@ -141,7 +141,7 @@ function dataHandling2(data){
     data.splice(1,4, "Roman Alamsyah Elsharawy", "Provinsi Bandar Lampung", "21/05/1989", 'Pria', 'SMA Internasional Metro')
     console.log(`a. ${data}`)
 
-    var bulan = input[3].split('/')
+    var bulan = data[3].split('/')
     switch(bulan[1]){
         case '01': console.log(`b. Januari`); break
         case '02': console.log(`b. Februari`); break
@@ -159,7 +159,7 @@ function dataHandling2(data){
     }
 
     console.log(`c. ${bulan.sort(function (value1, value2) { return value2 - value1 } )}`)
-    console.log(`d. ${input[3].split('/').join('-')}`)
+    console.log(`d. ${data[3].split('/').join('-')}`)
     var namaSlice = data[1].split('').slice(0,15).join('')
     console.log(`e. ${namaSlice}`)
 }
