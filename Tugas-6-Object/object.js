@@ -41,6 +41,7 @@ console.log(`\nSoal No. 2 (Shopping Time)`)
 
 function shoppingTime(memberId, money) {
     var sale = {
+        git : 1000,
         "Sepatu Stacattu" : 1500000,
         "Baju Zoro" : 500000,
         "Baju H&N" : 250000,
