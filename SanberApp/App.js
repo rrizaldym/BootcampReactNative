@@ -6,12 +6,13 @@ import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 // import Tugas13 from './Tugas/Tugas13/App'
 // import Tugas14 from './Tugas/Tugas14/App'
 // import Src from './Tugas/TugasNavigation/src/index'
-import Tugas15 from './Tugas/Tugas15/App'
-import TugasNavigation from './Tugas/TugasNavigation/index'
+// import Tugas15 from './Tugas/Tugas15/App'
+// import TugasNavigation from './Tugas/TugasNavigation/index'
+import Quiz3 from './Tugas/Quiz3/index'
 
 export default function App() {
   return (
-    <TugasNavigation />
+    <Quiz3 />
 
     // <View style={styles.container}>
     //   <Text>Open up App.js to start working on your app!</Text>

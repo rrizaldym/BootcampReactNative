@@ -48,7 +48,7 @@ const DrawerScreen = () =>(
 export default index = () =>{
     return(
         <NavigationContainer>
-            <Stack.Navigator>
+            <Stack.Navigator >
                 <Stack.Screen
                     name='Login' 
                     component={Login} 
