@@ -5,6 +5,7 @@ import {
 } from '@expo/vector-icons';
 
 import HomeScreen from './HomeScreen'
+import { BaseRouter } from '@react-navigation/native';
 
 
 export default class LoginScreen extends React.Component {
@@ -17,8 +18,8 @@ export default class LoginScreen extends React.Component {
     }
   }
 
-  loginHandler({navigation}) {
-    // console.log(this.state.userName, ' ', this.state.password)
+  loginHandler() {
+    console.log(this.state.userName, ' ', this.state.password)
     //? #Soal No. 1 (10 poin)
     //? Buatlah sebuah fungsi untuk berpindah halaman hanya jika password yang di input bernilai '12345678' 
     //? dan selain itu, maka akan mengubah state isError menjadi true dan tidak dapat berpindah halaman.
@@ -28,20 +29,15 @@ export default class LoginScreen extends React.Component {
 
     // Kode di sini 
     // clue gunakan if dan else
-    return navigation.navigate('Home')
-    // if (this.state.password == '1'){
-    //   return  (
-    //     navigation.navigate('Home')
-
-    //   )
-    // } else {
-    //   return {
-    //     setisError: true
-    //   }
-      
-    // }
-
-
+    if (this.state.password == '12345678'){
+      return (
+        this.props.navigation.navigate('Home', {userName: this.state.userName})
+      )
+    } else {
+      return {
+        setisError: true
+      }
+    }
   }
 
   render() {

@@ -12,7 +12,7 @@ export default class App extends React.Component {
   render() {
     return (
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="Home" >
+        <Stack.Navigator initialRouteName="Login" >
           <Stack.Screen name='Login' component={LoginScreen} options={{ headerShown: false }} />
           <Stack.Screen name='Home' component={HomeScreen} options={{ headerTitle: 'Daftar Barang' }} />
         </Stack.Navigator>

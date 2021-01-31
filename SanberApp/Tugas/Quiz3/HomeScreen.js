@@ -51,9 +51,9 @@ export default class HomeScreen extends React.Component {
             <Text>
               Hai,{'\n'}
               {/* //? #Soal 1 Tambahan, Simpan userName yang dikirim dari halaman Login pada komponen Text di bawah ini */}
-
+              
               <Text style={styles.headerText}>
-                {/* {this.props.route.params.userName} */}
+                {this.props.route.params.userName}
               </Text>
             </Text>
 
@@ -85,8 +85,11 @@ export default class HomeScreen extends React.Component {
         
         <FlatList
           data={data.produk}
-          renderItem={(list)=><ListItem/> }
+          renderItem={(data)=>
+          <ListItem data={data.item} />
+        }
           keyExtractor={(item)=>item.id}
+          numColumns={2}
         />
 
       </View>
@@ -101,9 +104,15 @@ class ListItem extends React.Component {
 
   //? #Soal No 3 (15 poin)
   //? Buatlah styling komponen ListItem, agar dapat tampil dengan baik di device
-
+  
+  updatePrice(price) {
+    price = this.props.totalPrice + parseInt(price);
+    this.setState({ totalPrice: price });
+    alert('todo!!')
+  }
   render() {
-    const data = this.props.data.item;
+    
+    let data = this.props.data;
     return (
       <View style={styles.itemContainer}>
         <Image
@@ -118,7 +127,7 @@ class ListItem extends React.Component {
           {this.currencyFormat(Number(data.harga))}
         </Text>
         <Text style={styles.itemStock}>Sisa stok: {data.stock-1 }</Text>
-        <Button title="BELI" color="blue" onPress={this.props.updatePrice} />
+        <Button title="BELI" color="blue" onPress={() => this.updatePrice(data.harga)} />
       </View>
     );
   }
@@ -146,21 +155,22 @@ const styles = StyleSheet.create({
     padding: 5,
   },
   itemImage: {
- 
-  },
-  itemName: {
+    height:100,
+    alignSelf:'stretch'
     
   },
+  itemName: {
+    fontWeight:'bold'
+  },
   itemPrice: {
+    color:'blue',
+    fontSize:20,
    
   },
   itemStock: {
-
   },
   itemButton: {
-
   },
   buttonText: {
-    
   },
 });
