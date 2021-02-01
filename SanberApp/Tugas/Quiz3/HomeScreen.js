@@ -102,7 +102,7 @@ export default class HomeScreen extends React.Component {
           <ListItem 
             data={data.item} 
             updatePrice={this.updatePrice} 
-            // updatePrice={() => this.updatePrice()}
+            // updatePrice={(harga) => this.updatePrice(harga)}
 // [2:49 PM, 2/1/2021] T Rahmac: antara fungsinya dibikin arrow, atau ngirimnya pake arrow.
 // [2:51 PM, 2/1/2021] T Rahmac: iya <ListItem updatePrice={() => this.updatePrice()} /> itu maneh ngirim this.updatePrice kedalem ListItem.
 // [2:51 PM, 2/1/2021] T Rahmac: atau bisa juga maneh bikin <ListItem updatePrice={this.updatePrice} /> tapi si this updatePrice harus arrow function.
