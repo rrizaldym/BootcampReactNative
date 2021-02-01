@@ -29,10 +29,23 @@ export default class HomeScreen extends React.Component {
     return 'Rp ' + num.toFixed(0).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
   }
 
-  updatePrice(price) {
+  updatePrice = (price) => {
     price = this.state.totalPrice + parseInt(price);
     this.setState({ totalPrice: price });
   }
+
+  // ketika maneh pake () => {} dibaca arrow function, 
+  // itu secara otomatis memasukan "this" kedalam class tersebut.
+
+  // [2:43 PM, 2/1/2021] T Rahmac: coba experiment gini
+
+  // 1. di <ListItem updatePrice={this.updatePrice} /> si updatePrice pake fungsi biasa // updatePrice(price) {}
+  // 2. di <ListItem updatePrice={this.updatePrice} /> si updatePrice pake arrow function // updatePrice = (price) => {}
+  // [2:44 PM, 2/1/2021] T Rahmac: itu untuk ngejawab kenapa tadi maneh pake yg nomor 1 diatas muncul error.
+  // [2:44 PM, 2/1/2021] T Rahmac: karena ga ada "this" didalem fungsinya.
+  // [2:45 PM, 2/1/2021] T Rahmac: supaya si this ada didalem fungsi tersebut, maka dibikinlah arrow fuuction ketika manggilnya.
+//   [2:49 PM, 2/1/2021] T Rahmac: jadi maneh harus teliti untuk pake fungsi.
+// [2:49 PM, 2/1/2021] T Rahmac: antara fungsinya dibikin arrow, atau ngirimnya pake arrow.
 
   render() {
     console.log(data);
@@ -86,7 +99,18 @@ export default class HomeScreen extends React.Component {
         <FlatList
           data={data.produk}
           renderItem={(data)=>
-          <ListItem data={data.item} />
+          <ListItem 
+            data={data.item} 
+            updatePrice={this.updatePrice} 
+            // updatePrice={() => this.updatePrice()}
+// [2:49 PM, 2/1/2021] T Rahmac: antara fungsinya dibikin arrow, atau ngirimnya pake arrow.
+// [2:51 PM, 2/1/2021] T Rahmac: iya <ListItem updatePrice={() => this.updatePrice()} /> itu maneh ngirim this.updatePrice kedalem ListItem.
+// [2:51 PM, 2/1/2021] T Rahmac: atau bisa juga maneh bikin <ListItem updatePrice={this.updatePrice} /> tapi si this updatePrice harus arrow function.
+// [2:52 PM, 2/1/2021] T Rahmac: umunya orang bikin fungsi pake arrow, supaya ga muncul error kaya maneh tadi.
+// [2:53 PM, 2/1/2021] T Rahmac: terus masalah passing parameter tergantung cara maneh tadi juga.
+// [2:54 PM, 2/1/2021] T Rahmac: <ListItem updatePrice={(params) => this.updatePrice(params)} />
+// [2:54 PM, 2/1/2021] T Rahmac: <ListItem updatePrice={this.updatePrice} /> kalo pake cara ini, params yg dikirim otomatis langsung dikirim ke fungsinya, tapa perlu maneh definisiin dulu.
+          />
         }
           keyExtractor={(item)=>item.id}
           numColumns={2}
@@ -105,14 +129,10 @@ class ListItem extends React.Component {
   //? #Soal No 3 (15 poin)
   //? Buatlah styling komponen ListItem, agar dapat tampil dengan baik di device
   
-  updatePrice(price) {
-    price = this.props.totalPrice + parseInt(price);
-    this.setState({ totalPrice: price });
-    alert('todo!!')
-  }
   render() {
     
     let data = this.props.data;
+    // let updatePrice = this.props.updatePrice
     return (
       <View style={styles.itemContainer}>
         <Image
@@ -127,7 +147,12 @@ class ListItem extends React.Component {
           {this.currencyFormat(Number(data.harga))}
         </Text>
         <Text style={styles.itemStock}>Sisa stok: {data.stock-1 }</Text>
-        <Button title="BELI" color="blue" onPress={() => this.updatePrice(data.harga)} />
+        <Button 
+          title="BELI" 
+          color="blue" 
+          onPress={() => 
+            this.props.updatePrice(data.harga)} 
+        />
       </View>
     );
   }
